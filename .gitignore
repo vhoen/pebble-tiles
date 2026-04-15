@@ -1,0 +1,26 @@
+# Build output
+build/
+
+# SDK Pebble (si installé localement dans le projet)
+.pebble-sdk/
+
+# Dépendances Node (si tu utilises des outils JS)
+node_modules/
+
+# Fichiers de configuration locale de l'éditeur
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Fichiers temporaires
+*.tmp
+*.bak

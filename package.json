@@ -1,0 +1,41 @@
+{
+  "name": "pebble-tiles",
+  "author": "vhoen",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "pebble build",
+    "emu": "pkill -x qemu-pebble || true; pebble build && nohup pebble install --emulator emery ./build/pebble-tiles.pbw --vnc >/tmp/pebble-emu.log 2>&1 &",
+    "emu:fg": "pkill -x qemu-pebble || true; pebble build && pebble install --emulator emery ./build/pebble-tiles.pbw",
+    "emu:vnc": "pkill -x qemu-pebble || true; pebble build && pebble install --emulator emery ./build/pebble-tiles.pbw --vnc",
+    "emu:logs": "tail -f /tmp/pebble-emu.log"
+  },
+  "keywords": ["pebble-app"],
+  "private": true,
+  "dependencies": {
+    "@rebble/clay": "^1.0.4"
+  },
+  "pebble": {
+    "displayName": "Pebble Tiles",
+    "uuid": "f2d67edf-2602-4a4f-8cf6-8d8fd4063a92",
+    "projectType": "moddable",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "targetPlatforms": [
+      "emery",
+      "gabbro"
+    ],
+    "watchapp": {
+      "watchface": true
+    },
+    "messageKeys": [
+      "DisplayHint",
+      "UseAMPM"
+    ],
+    "capabilities": [
+      "configurable"
+    ],
+    "resources": {
+      "media": []
+    }
+  }
+}
