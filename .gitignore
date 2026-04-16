@@ -23,4 +23,4 @@ npm-debug.log*
 
 # Fichiers temporaires
 *.tmp
-*.bak
+*.bak.lock-waf_linux_build
