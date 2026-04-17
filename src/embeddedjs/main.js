@@ -11,7 +11,7 @@ const FRAME_THICKNESS = 4;
 const SEPARATOR_THICKNESS = 2;
 const CELL_GAP = 1;
 
-const BOARD_BG_HEX = "#10141f";
+const BOARD_BG_HEX = "#B0B0B0";
 const ZONE_BG_HEX = "#B0B0B0";
 const OUTLINE_HEX = "#3c4660";
 const FRAME_HEX = "#7A7A7A";
