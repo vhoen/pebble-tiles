@@ -12,25 +12,20 @@ const FRAME_THICKNESS = 4;
 const SEPARATOR_THICKNESS = 2;
 const CELL_GAP = 1;
 
-const BOARD_BG_HEX = "#B0B0B0";
-const ZONE_BG_HEX = "#B0B0B0";
-const OUTLINE_HEX = "#3c4660";
-const FRAME_HEX = "#7A7A7A";
-const HINT_HEX = "#ffffff";
+// Neutrals must sit on the Pebble 64-color grid (0x00/0x55/0xAA/0xFF) to avoid dither haze.
+const BOARD_BG_HEX = "#555555";
+const ZONE_BG_HEX = "#555555";
+const OUTLINE_HEX = "#000000";
+const FRAME_HEX = "#000000";
+const HINT_HEX = "#FFFFFF";
 
 const COLOR_HEXES = [
-  // "#A7E8BD",
-  // "#88D8C0",
-  "#50C878",
-  "#6B8E23",
-  // "#FFFACD",
-  "#FFDB58",
-  "#FFD700",
-  // "#E6E8FA",
-  "#87CEEB",
-  // "#40E0D0",
-  "#008B8B",
-  // "#191970",
+  "#FF5555",
+  "#FFAA00",
+  "#FFFF55",
+  "#55FF55",
+  "#55FFFF",
+  "#FF55FF",
 ];
 
 function hexToColor(hex) {
