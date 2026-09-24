@@ -1,6 +1,8 @@
 var Clay = require("@rebble/clay");
 var clayConfig = require("./config");
 
+var READY_MESSAGE = 15025;
+
 new Clay(clayConfig);
 
 function getStoredSettings() {
@@ -13,6 +15,14 @@ function getStoredSettings() {
 	};
 }
 
-Pebble.addEventListener("ready", function() {
+function sendStoredSettings() {
 	Pebble.sendAppMessage(getStoredSettings());
+}
+
+Pebble.addEventListener("ready", sendStoredSettings);
+
+// Moddable sends READY_MESSAGE when its AppMessage bridge starts.
+Pebble.addEventListener("appmessage", function(e) {
+	if (e.payload[READY_MESSAGE] !== undefined)
+		sendStoredSettings();
 });

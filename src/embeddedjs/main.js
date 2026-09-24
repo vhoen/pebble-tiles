@@ -1,4 +1,5 @@
 import Poco from "commodetto/Poco";
+import Message from "pebble/message";
 
 const render = new Poco(screen);
 
@@ -48,6 +49,32 @@ const settings = {
   displayHint: true,
   useAMPM: false
 };
+
+function toBool(value, defaultValue) {
+  if (value === undefined || value === null)
+    return defaultValue;
+
+  if (typeof value === "boolean")
+    return value;
+
+  return Number(value) !== 0;
+}
+
+function applySettings(msg) {
+  if (msg.has("DisplayHint"))
+    settings.displayHint = toBool(msg.get("DisplayHint"), true);
+
+  if (msg.has("UseAMPM"))
+    settings.useAMPM = toBool(msg.get("UseAMPM"), false);
+}
+
+new Message({
+  keys: ["DisplayHint", "UseAMPM"],
+  onReadable() {
+    applySettings(this.read());
+    draw();
+  }
+});
 
 function createShuffledOrder() {
   const order = TILE_COLORS.map((_, index) => index);
