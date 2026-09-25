@@ -10,22 +10,22 @@ const BLOCKS_PER_HOUR = 6;
 const BOARD_MARGIN = 10;
 const FRAME_THICKNESS = 4;
 const SEPARATOR_THICKNESS = 2;
-const CELL_GAP = 1;
+const CELL_GAP = 0;
 
-// Neutrals must sit on the Pebble 64-color grid (0x00/0x55/0xAA/0xFF) to avoid dither haze.
-const BOARD_BG_HEX = "#555555";
-const ZONE_BG_HEX = "#555555";
-const OUTLINE_HEX = "#000000";
+// Neutrals on the Pebble 64-color grid (0x00/0x55/0xAA/0xFF) — black reduces LCD haze.
+const BOARD_BG_HEX = "#FFFFFF";
+const ZONE_BG_HEX = "#FFFFFF";
 const FRAME_HEX = "#000000";
 const HINT_HEX = "#FFFFFF";
 
+// Saturated mid-value hues read clearer on Pebble LCD than near-white pastels.
 const COLOR_HEXES = [
-  "#FF5555",
-  "#FFAA00",
-  "#FFFF55",
-  "#55FF55",
-  "#55FFFF",
-  "#FF55FF",
+  "#FF0000",
+  "#FF5500",
+  "#AAAA00",
+  "#00AA00",
+  "#00AAFF",
+  "#FF00AA",
 ];
 
 function hexToColor(hex) {
@@ -35,7 +35,6 @@ function hexToColor(hex) {
 
 const BOARD_BG = hexToColor(BOARD_BG_HEX);
 const ZONE_BG = hexToColor(ZONE_BG_HEX);
-const OUTLINE = hexToColor(OUTLINE_HEX);
 const FRAME = hexToColor(FRAME_HEX);
 const HINT_COLOR = hexToColor(HINT_HEX);
 const TILE_COLORS = COLOR_HEXES.map(hexToColor);
@@ -141,7 +140,7 @@ function getBlocksForCurrentHour(minutes) {
 }
 
 function drawBlock(x, y, width, height, fillColor, fillRatio = 1) {
-  render.fillRectangle(OUTLINE, x, y, width, height);
+  render.fillRectangle(FRAME, x, y, width, height);
 
   if (width > 2 && height > 2) {
     const innerWidth = width - 2;
@@ -149,24 +148,11 @@ function drawBlock(x, y, width, height, fillColor, fillRatio = 1) {
     const clampedFillRatio = Math.max(0, Math.min(1, fillRatio));
     const fillWidth = Math.floor(innerWidth * clampedFillRatio);
 
-    // Keep the unfilled part of the current block consistent with watchface background.
-    render.fillRectangle(
-      BOARD_BG,
-      x + 1,
-      y + 1,
-      innerWidth,
-      innerHeight
-    );
+    // Unfilled remainder matches the board so partial blocks stay seamless on black.
+    render.fillRectangle(BOARD_BG, x + 1, y + 1, innerWidth, innerHeight);
 
-    if (fillWidth > 0) {
-      render.fillRectangle(
-        fillColor,
-        x + 1,
-        y + 1,
-        fillWidth,
-        innerHeight
-      );
-    }
+    if (fillWidth > 0)
+      render.fillRectangle(fillColor, x + 1, y + 1, fillWidth, innerHeight);
   }
 }
 
