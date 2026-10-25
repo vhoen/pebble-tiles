@@ -1,15 +1,18 @@
 {
   "name": "pebble-tiles",
   "author": "vhoen",
-  "version": "1.0.0",
+  "version": "1.1.2",
   "scripts": {
     "build": "pebble build",
     "emu": "pkill -x qemu-pebble || true; pebble build && nohup pebble install --emulator emery ./build/pebble-tiles.pbw --vnc >/tmp/pebble-emu.log 2>&1 &",
     "emu:fg": "pkill -x qemu-pebble || true; pebble build && pebble install --emulator emery ./build/pebble-tiles.pbw",
     "emu:vnc": "pkill -x qemu-pebble || true; pebble build && pebble install --emulator emery ./build/pebble-tiles.pbw --vnc",
-    "emu:logs": "tail -f /tmp/pebble-emu.log"
+    "emu:logs": "tail -f /tmp/pebble-emu.log",
+    "publish:rebble": "./scripts/publish-rebble.sh"
   },
-  "keywords": ["pebble-app"],
+  "keywords": [
+    "pebble-app"
+  ],
   "private": true,
   "dependencies": {
     "@rebble/clay": "^1.0.4"
